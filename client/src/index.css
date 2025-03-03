@@ -1,0 +1,53 @@
+/* Base styles for entire application */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Rajdhani', 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  /* System theme background pattern */
+  body:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="rgb(10,10,30)" /><path d="M0 0L100 100M100 0L0 100" stroke="rgba(50,50,100,0.2)" stroke-width="1" /></svg>');
+  }
+  
+  /* Link styling */
+  a {
+    color: #4080ff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  a:hover {
+    color: #a0c0ff;
+    text-shadow: 0 0 5px rgba(64, 128, 255, 0.5);
+  }
+  
+  /* Focus styles for accessibility */
+  :focus {
+    outline: 2px solid #4080ff;
+    outline-offset: 2px;
+  }

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewposrt" content="width=device-width, initial-scale=1.0">
+    <title>LEVEL UP</title>
+    <link rel="stylesheet" href="client\App.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initSystemFromStorage();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="system-window">
+            <h2 class="window-title">WELCOME PLAYER</h2>
+            <div class="level-display">
+                <div class="level-number" id="level-display">10</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="exp-bar"></div>
+                </div>
+                <div class="progress-text">35% | 350/1000 XP</div>
+            </div>
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="status">STATUS</button>
+                <button class="tab-button" data-tab="quests">QUESTS</button>
+                <button class="tab-button" data-tab="inventory">INVENTORY</button>
+                <button class="tab-button" data-tab="notes">NOTES</button>
+                <button class="tab-button" data-tab="share">SHARE</button>
+            </div>
+            
+            <div class="tab-content active" id="status-tab">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-name">Strength</span>
+                        <input type="number" min="0" value="75" class="editable-stat-value" id="strength-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Agility</span>
+                        <input type="number" min="0" value="92" class="editable-stat-value" id="agility-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Intelligence</span>
+                        <input type="number" min="0" value="68" class="editable-stat-value" id="intelligence-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Endurance</span>
+                        <input type="number" min="0" value="85" class="editable-stat-value" id="endurance-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Vitality</span>
+                        <input type="number" min="0" value="79" class="editable-stat-value" id="vitality-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Perception</span>
+                        <input type="number" min="0" value="62" class="editable-stat-value" id="perception-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Willpower</span>
+                        <input type="number" min="0" value="88" class="editable-stat-value" id="willpower-stat">
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Charisma</span>
+                        <input type="number" min="0" value="71" class="editable-stat-value" id="charisma-stat">
+                    </div>
+                </div>
+                
+                <div class="system-message">
+                    Available points: <span id="available-points">5</span>
+                </div>
+                
+                <button class="button" id="save-stats-btn">SAVE STATS</button>
+                <button class="button" id="reset-stats-btn">RESET</button>
+            </div>
+            
+            <div class="tab-content" id="quests-tab">
+                <div class="quest-item">
+                    <div class="quest-title">
+                        <div class="quest-name">Daily Training</div>
+                        <div class="quest-status">IN PROGRESS</div>
+                    </div>
+                    <div class="quest-description">Complete your daily workout routine.</div>
+                    <textarea type="text" placeholder="Add task details..." class="notes-area" style="height: 50px;"></textarea>
+                    <button class="button" onclick="completeQuest(this)">MARK AS COMPLETE</button>
+                </div>
+                
+                <!-- <div class="quest-item completed">
+                    <div class="quest-title">
+                        <div class="quest-name">Weekly Reading</div>
+                        <div class="quest-status">COMPLETED</div>
+                    </div>
+                    <div class="quest-description">One non-fiction book chapter.</div>
+                </div> -->
+                
+                <!-- <div class="quest-item">
+                    <div class="quest-title">
+                        <div class="quest-name">Skill Development</div>
+                        <div class="quest-status">Completed</div>
+                    </div>
+                    <div class="quest-description">Practice programming for 1 hour.</div>
+                    <input type="text" placeholder="Add task details..." class="notes-area" style="height: 50px;">
+                    <button class="button" onclick="completeQuest(this)">MARK AS COMPLETE</button>
+                </div> -->
+                
+                <button class="button" id="add-quest-btn">ADD NEW QUEST</button>
+            </div>
+            
+            <div class="tab-content" id="inventory-tab">
+                <div class="inventory-grid">
+                    <div class="inventory-item">
+                        <div class="item-icon">📚</div>
+                        <div class="item-name">Knowledge</div>
+                        <div class="item-quantity">x5</div>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="item-icon">💪</div>
+                        <div class="item-name">Strength Potion</div>
+                        <div class="item-quantity">x2</div>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="item-icon">🧠</div>
+                        <div class="item-name">Memory Crystal</div>
+                        <div class="item-quantity">x3</div>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="item-icon">⚡</div>
+                        <div class="item-name">Energy Drink</div>
+                        <div class="item-quantity">x7</div>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="item-icon">🔋</div>
+                        <div class="item-name">Focus Gem</div>
+                        <div class="item-quantity">x1</div>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="item-icon">🎯</div>
+                        <div class="item-name">Target Practice</div>
+                        <div class="item-quantity">x4</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="button" id="add-item-btn">ADD ITEM</button>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="notes-tab">
+                <textarea class="notes-area" style="height: 300px;" placeholder="Add your personal notes here...">- Remember to practice meditation daily
+- Schedule time for language study
+- Research new skill: [Public Speaking]
+- Check progress on project milestone by Friday
+- Book health checkup appointment
+
+Next level goals:
+1. Improve strength stat to 80
+2. Complete "Advanced Communication" skill tree
+3. Unlock special ability: [Focused Learning]</textarea>
+                <div>
+                    <button class="button" id="save-notes-btn">SAVE NOTES</button>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="share-tab">
+                <div class="system-message">
+                    Generate a link to share your current stats and level with others.
+                </div>
+                <div class="share-section">
+                    <input type="text" readonly value="https://mysystem.io/share/user123?l=10&s=75,92,68,85,79,62,88,71" class="share-link" id="share-link">
+                    <button class="button" id="copy-link-btn">COPY LINK</button>
+                    <button class="button" id="refresh-link-btn">GENERATE NEW</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">Stats saved successfully!</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
